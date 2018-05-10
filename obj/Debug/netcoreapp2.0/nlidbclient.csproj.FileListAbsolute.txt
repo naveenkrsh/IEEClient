@@ -1,0 +1,11 @@
+D:\Hackasm\May\nlidbclient\bin\Debug\netcoreapp2.0\nlidbclient.deps.json
+D:\Hackasm\May\nlidbclient\bin\Debug\netcoreapp2.0\nlidbclient.runtimeconfig.json
+D:\Hackasm\May\nlidbclient\bin\Debug\netcoreapp2.0\nlidbclient.runtimeconfig.dev.json
+D:\Hackasm\May\nlidbclient\bin\Debug\netcoreapp2.0\nlidbclient.dll
+D:\Hackasm\May\nlidbclient\bin\Debug\netcoreapp2.0\nlidbclient.pdb
+D:\Hackasm\May\nlidbclient\obj\Debug\netcoreapp2.0\nlidbclient.csprojResolveAssemblyReference.cache
+D:\Hackasm\May\nlidbclient\obj\Debug\netcoreapp2.0\nlidbclient.csproj.CoreCompileInputs.cache
+D:\Hackasm\May\nlidbclient\obj\Debug\netcoreapp2.0\nlidbclient.AssemblyInfoInputs.cache
+D:\Hackasm\May\nlidbclient\obj\Debug\netcoreapp2.0\nlidbclient.AssemblyInfo.cs
+D:\Hackasm\May\nlidbclient\obj\Debug\netcoreapp2.0\nlidbclient.dll
+D:\Hackasm\May\nlidbclient\obj\Debug\netcoreapp2.0\nlidbclient.pdb

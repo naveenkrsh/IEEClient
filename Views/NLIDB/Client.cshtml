@@ -1,0 +1,120 @@
+@using System.Data
+@using nlidbclient.Controllers
+@model IIEModel
+@{
+    ViewData["Title"] = "Demo Client";
+}
+<br>
+<div class="row">
+    @using(Html.BeginForm("CreateQuery","NLIDB"))
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <div class="dropdown">
+                    <input type="text" id="txtQuery" autocomplete="off" name="query"  class="form-control" placeholder="type query" style="width:100%" data-provide="typeahead" value="@Model.Text">
+                </div>
+            </div>
+            <div>
+               <input type="submit" class="btn btn-success" />
+            </div>
+        </div>
+    }
+    <div class="col-md-4"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12" style="height:750px">
+        @if(Model.Table.Rows.Count>0)
+        {
+        
+            <table class="table" cellpadding="0" cellspacing="0">
+                <tr>
+                    @foreach (DataColumn column in Model.Table.Columns )
+                    {
+                        <th>@column.ColumnName</th>
+                    }
+                </tr>
+                @foreach (DataRow row in Model.Table.Rows)
+                {
+                    <tr>
+                        @foreach (DataColumn column in Model.Table.Columns )
+                        {
+                            <td>@row[column.ColumnName]</td>
+                        }
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script>
+
+    //  function(query) {
+    //         return $.get("http://localhost:5001/api/general?prefix="+query);
+    //         }
+       var jsonData = ["Naveen","Sharma","Sachin","Nirav"];
+
+    var productNames = [];
+    $.each(jsonData, function(index, product) {
+      productNames.push(product.name + "#" + product.image + "#" + product.id);
+    });
+
+    $.get("http://localhost:5001/api/general", function(data){
+       // $("#name").typeahead({ source:data });
+   
+
+    $('#txtQuery').typeahead({
+      source: data,
+      highlighter: function(item) {
+        //var parts = item.split('#'),
+          html = '<div><div class="typeahead-inner" >';
+        // html += '<div class="item-img" style="background-image: url(' + parts[1] + ')"></div>';
+        html += '<div class="item-body">';
+        html += '<p class="item-heading">' +item + '</p>';
+        html += '</div>';
+        html += '</div></div>';
+
+        var query = this.query;
+        var reEscQuery = query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        var reQuery = new RegExp('(' + reEscQuery + ')', "gi");
+        var jElem = $(html);
+        var textNodes = $(jElem.find('*')).add(jElem).contents().filter(function() {
+          return this.nodeType === 3;
+        });
+        textNodes.replaceWith(function() {
+          return $(this).text().replace(reQuery, '<strong>$1</strong>');
+        });
+
+        return jElem.html();
+      },
+      updater: function(selectedName) {
+        var name = selectedName;
+        return name;
+      }
+    });
+ },'json');
+
+
+    //  $( document ).ready(function() {
+    //     $('#txtQuery').typeahead({
+    //         name: 'search',
+    //         remote: {
+    //         url: 'http://suggestqueries.google.com/complete/search?client=chrome&q=%QUERY',
+    //         dataType: 'jsonp',
+    //         cache: false,
+    //         filter: function(parsedResponse){
+    //             return (parsedResponse.length > 1) ? parsedResponse[1] : [] ;
+    //         }
+    //         }
+    //     }).on('typeahead:selected', function(e){
+    //         e.target.form.submit();
+    //     });
+    //     });
+    </script>
+}
