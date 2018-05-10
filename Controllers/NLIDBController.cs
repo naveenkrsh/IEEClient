@@ -53,7 +53,8 @@ namespace nlidbclient.Controllers
                     dt = ds.Tables[0];
                     if (dt.Rows.Count > 0)
                         DBHelper.SaveSqlQuery(query, contents);
-
+                    else
+                        ErrorMessage(dt);
                 }
                 else
                 {
@@ -72,8 +73,10 @@ namespace nlidbclient.Controllers
             return View("Client", model);
         }
 
-        private static void ErrorMessage(DataTable dt)
+        private void ErrorMessage(DataTable dt)
         {
+            dt.Clear();
+            dt.Columns.Clear();
             dt.Columns.Add("INFO:");
             DataRow row = dt.NewRow();
             row[0] = "Our database does not contain the information you are seeking.";
